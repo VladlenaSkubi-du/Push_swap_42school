@@ -6,7 +6,7 @@
 /*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:40:53 by sschmele          #+#    #+#             */
-/*   Updated: 2019/10/04 21:26:07 by sschmele         ###   ########.fr       */
+/*   Updated: 2019/10/23 12:37:56 by sschmele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,11 @@
 typedef	struct		s_stack
 {
 	int				n;
-	int				f;
 	struct s_stack	*next;
 }					t_stack;
 
 typedef	struct		s_push
 {
-	t_stack			*a;
-	t_stack			*b;
 	t_stack			*start_a;
 	t_stack			*start_b;
 	int				total;
@@ -41,6 +38,14 @@ typedef	struct		s_push
 	int				min;
 	int				max;
 }					t_push;
+
+typedef struct		s_rotate
+{
+	int				ra_a;
+	int				rb_b;
+	int				rra_a;
+	int				rrb_b;
+}					t_rotate;
 
 /*
 ** ------------------------------- Common functions ---------------------------
@@ -119,25 +124,16 @@ void				check_after_stdin(t_push *push);
 */
 
 /*
-** Algorithm starts -
-** in file - main_push_swap.c
-*/
-
-void				count_operations(t_push *push);
-int					check_if_sorted(t_push *push);
-
-/*
-** Counting operations -
+** Algorithm starts here -
 ** in file - push_swap_processing.c
 */
 
+void				count_operations(t_push *push);
 void				sort_three_nums_2_cases(t_push *push);
 void				sort_three_nums_other_cases(t_push *push,
 						int up, int mid, int down);
 void				find_operation_todo(t_push *push);
-void				move_chosen_way(t_push *push,
-						t_stack *a_stack_to_put, t_stack *b_stack_to_move);
-void				check_and_finish_sort(t_push *push);
+int					check_if_sorted(t_push *push);
 
 /*
 ** Stack_a - searching the right element to put a b-stack element on -
@@ -148,10 +144,20 @@ t_stack				*find_best_a(t_push *push, int b_elem);
 t_stack				*put_on_minimal_a(t_push *push, t_stack *best_a);
 void				choose_best_move(t_push *push,
 						t_stack **a_stack_to_put, t_stack **b_stack_to_move);
+
+/*
+** Rotations - all the functions where we check or use rotations -
+** in file rotations.c
+*/
+
+t_rotate        	*init_rotate(t_push *push, int a, int b);
 int					number_operations(t_push *push,
 						t_stack *tmp_a, t_stack *tmp_b);
+void				move_chosen_way(t_push *push,
+						t_stack *a_stack_to_put, t_stack *b_stack_to_move);
 int					count_r_rr(t_stack *start,
 						int best, int max, int flag);
+void				check_and_finish_sort(t_push *push);
 
 /*
 **Just to see some steps - in file print_for_convenience.c

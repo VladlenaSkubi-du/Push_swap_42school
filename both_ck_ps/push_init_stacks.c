@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_operations.c                                  :+:      :+:    :+:   */
+/*   push_init_stacks.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 21:16:14 by sschmele          #+#    #+#             */
-/*   Updated: 2019/10/02 12:47:22 by sschmele         ###   ########.fr       */
+/*   Updated: 2019/10/22 11:05:01 by sschmele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,34 @@
 
 void				push_to_stack_a(t_push *push, int n)
 {
-	static size_t	i = 0;
+	static t_stack	*run;
 
-	if (i)
+	if (push->total == 0)
 	{
-		push->a->next = init_stack();
-		push->a = push->a->next;
+		run = init_stack();
+		push->start_a = run;
 	}
 	else
 	{
-		push->a = init_stack();
-		push->start_a = push->a;
-		i++;
+		run->next = init_stack();
+		run = run->next;
 	}
-	push->a->n = n;
-	push->a->next = NULL;
+	run->n = n;
 }
 
 void				push_to_stack_b(t_push *push, int n)
 {
-	static size_t	i = 0;
+	static t_stack	*run;
 
-	if (i)
+	if (push->total == 0)
 	{
-		push->b->next = init_stack();
-		push->b = push->b->next;
+		run = init_stack();
+		push->start_b = run;
 	}
 	else
 	{
-		push->b = init_stack();
-		push->start_b = push->b;
-		i++;
+		run->next = init_stack();
+		run = run->next;
 	}
-	push->b->n = n;
-	push->b->next = NULL;
+	run->n = n;
 }

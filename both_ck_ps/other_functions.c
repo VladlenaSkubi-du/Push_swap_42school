@@ -6,7 +6,7 @@
 /*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 20:52:16 by sschmele          #+#    #+#             */
-/*   Updated: 2019/10/04 21:26:21 by sschmele         ###   ########.fr       */
+/*   Updated: 2019/10/22 11:01:04 by sschmele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ t_push			*init_push(void)
 	t_push		*push;
 
 	push = (t_push *)ft_xmalloc(sizeof(t_push));
-	push->a = NULL;
-	push->b = NULL;
 	push->start_a = NULL;
 	push->start_b = NULL;
 	push->total = 0;
@@ -49,7 +47,6 @@ t_stack			*init_stack(void)
 	stack = (t_stack *)ft_xmalloc(sizeof(t_stack));
 	stack->next = NULL;
 	stack->n = 0;
-	stack->f = 0;
 	return (stack);
 }
 

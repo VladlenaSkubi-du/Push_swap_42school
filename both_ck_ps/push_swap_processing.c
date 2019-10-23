@@ -6,11 +6,39 @@
 /*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 13:52:39 by sschmele          #+#    #+#             */
-/*   Updated: 2019/10/04 21:25:39 by sschmele         ###   ########.fr       */
+/*   Updated: 2019/10/23 12:31:52 by sschmele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/*
+** The algorithm starts here: we send all the numbers exept of three of them to
+** the stack_b. After we sort 3 left numbers in stack_a.
+*/
+
+void			count_operations(t_push *push)
+{
+	int			three;
+	
+	three = push->total + 1;
+	while (--three > 3)
+	{
+		pb(push);
+		ft_putendl("pb");
+	}
+	push->total_a = three;
+	push->total_b = (push->total - three > 0) ? push->total - three : 0;
+	(three == 3) ? sort_three_nums_2_cases(push) : 0;
+	if (three == 2 && push->start_a->n > push->start_a->next->n)
+	{
+		sa(push);
+		ft_putendl("sa");
+	}
+	while (push->start_b)
+		find_operation_todo(push);
+	(check_if_sorted(push) == -1) ? check_and_finish_sort(push) : 0;
+}
 
 /*
 ** The algorithm continues here: there are five cases to sort.
@@ -26,7 +54,7 @@ void			sort_three_nums_2_cases(t_push *push)
 	int			up;
 	int			mid;
 	int			down;
-
+	
 	up = push->start_a->n;
 	mid = push->start_a->next->n;
 	down = push->start_a->next->next->n;
@@ -68,6 +96,11 @@ void			sort_three_nums_other_cases(t_push *push,
 	}
 }
 
+/*
+** Here we are looking for the best options: which b stack on which a stack to put
+** and perform the best operation found
+*/
+
 void			find_operation_todo(t_push *push)
 {
 	t_stack		*a_stack_to_put;
@@ -84,47 +117,18 @@ void			find_operation_todo(t_push *push)
 	}
 }
 
-void			move_chosen_way(t_push *push,
-					t_stack *a_stack_to_put, t_stack *b_stack_to_move)
+int				check_if_sorted(t_push *push)
 {
-	int			ra_a;
-	int			rra_a;
-	int			rb_b;
-	int			rrb_b;
-	int			t;
+	t_stack		*tmp;
 
-	ra_a = count_r_rr(push->start_a, a_stack_to_put->n, 0, 0);
-	rra_a = count_r_rr(push->start_a, a_stack_to_put->n, push->total_a, 1);
-	t = (ra_a <= rra_a) ? ra_a + 1 : rra_a + 1;
-	while (--t)
+	if (push->start_b)
+		return (-1);
+	tmp = push->start_a;
+	while (tmp && tmp->next)
 	{
-		(ra_a <= rra_a) ? ra(push) : rra(push);
-		ft_putendl((ra_a <= rra_a) ? "ra" : "rra");
+		if (tmp->n > tmp->next->n)
+			return (-1);
+		tmp = tmp->next;
 	}
-	rb_b = count_r_rr(push->start_b, b_stack_to_move->n, 0, 0);
-	rrb_b = count_r_rr(push->start_b, b_stack_to_move->n, push->total_b, 1);
-	t = (rb_b <= rrb_b) ? rb_b + 1 : rrb_b + 1;
-	while (--t)
-	{
-		(rb_b <= rrb_b) ? rb(push) : rrb(push);
-		ft_putendl((rb_b <= rrb_b) ? "rb" : "rrb");
-	}
-	pa(push);
-	ft_putendl("pa");
-}
-
-void			check_and_finish_sort(t_push *push)
-{
-	int			ra_a;
-	int			rra_a;
-	int			t;
-
-	ra_a = count_r_rr(push->start_a, push->min, 0, 0);
-	rra_a = count_r_rr(push->start_a, push->min, push->total_a, 1);
-	t = (ra_a <= rra_a) ? ra_a + 1 : rra_a + 1;
-	while (--t)
-	{
-		(ra_a <= rra_a) ? ra(push) : rra(push);
-		ft_putendl((ra_a <= rra_a) ? "ra" : "rra");
-	}
+	return (0);
 }

@@ -19,6 +19,7 @@ COMMON =	check_string_argv.c \
 			check_stdin_operations.c \
 			push_swap_processing.c \
 			investigations_in_a_stack.c \
+			rotations.c \
 			other_functions.c \
 			print_for_convenience.c
 
@@ -43,7 +44,7 @@ all: $(CHECKER) $(PUSH_SWAP)
 $(CHECKER): $(OBJS_CK) $(OBJS_COMMON)
 	@echo "\033[1;32mCompiling push_swap...\033[0m"
 	@make -C ./libft
-	gcc $(FLAGS) $(OBJS_CK) $(OBJS_COMMON) -o $(CHECKER) libft/libft.a
+	@gcc $(FLAGS) $(OBJS_CK) $(OBJS_COMMON) -o $(CHECKER) libft/libft.a
 
 $(OBJS_CK): $(DIR_O_CK)/%.o: $(DIR_S_CK)/%.c includes/push_swap.h
 	@mkdir -p $(DIR_O_CK)
@@ -54,7 +55,7 @@ $(OBJS_COMMON): $(DIR_O_COM)/%.o: $(DIR_S_COM)/%.c includes/push_swap.h
 	@gcc $(FLAGS) -c $(INCLUDES) -o $@ $<
 
 $(PUSH_SWAP): $(OBJS_PS) $(OBJS_COMMON)
-	gcc $(FLAGS) $(OBJS_PS) $(OBJS_COMMON) -o $(PUSH_SWAP) libft/libft.a
+	@gcc $(FLAGS) $(OBJS_PS) $(OBJS_COMMON) -o $(PUSH_SWAP) libft/libft.a
 	@echo "\033[1;32mPush_swap and checker are ready\033[0m"
 
 $(OBJS_PS): $(DIR_O_PS)/%.o: $(DIR_S_PS)/%.c includes/push_swap.h
