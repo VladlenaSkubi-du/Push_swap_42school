@@ -44,7 +44,7 @@ and then:
     rra
     ^D
 
-Checker can give you answers: "OK" if such operations will sort the stack, "KO" if not and "Error" if the following is true:
+Checker can give you answers: "OK" if such operations sorts the stack, "KO" if not and "Error" if the following is true:
  - there are not integers in the array input;
  - there are dublications in the array input;
  - "-5-", "--4", "+6+" and other mistakes with signs;
@@ -68,16 +68,16 @@ And get output:
     rra
     rra
 
-Push swap answers you what operations have to be done to sort the stack. Can also give you "Error" in the same situations as checker.
+Push swap answers you what operations have to be performed to sort the stack. Can also give you "Error" in the same situations as checker.
 
 Go and try. Good luck!
 
 # Algorithm
-The beginning of the algorithm and the main points are explained here: https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a.
+The beginning of the algorithm and the main points of the subject are explained here: https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a.
 
 The algorithm is based on rotations with the following steps:
 1) push all the numbers from input to the a-stack
-2) leave only three numbers in the a-stack and everything else push to the b-stack
+2) leave only three numbers in the a-stack, sort them and everything else push to the b-stack
 3) chose the best b-stack-number to move to the a-stack-number and do that using only rotations
 4) move according to the chosen parameters and than repeat untill b-stack is empty
 
