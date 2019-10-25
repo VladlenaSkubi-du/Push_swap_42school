@@ -1,7 +1,7 @@
 CHECKER = checker
 PUSH_SWAP = push_swap
 
-FLAGS = -g -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 
 INCLUDES = -I ./includes
 
