@@ -16,7 +16,7 @@ Clone the repository:
 Get into it and compile the checker and push-swap-programs:
 
     cd [folder's name you want]
-    git add submodule https://github.com/VladlenaSkubi-du/libft_42school.git libft
+    git submodule add https://github.com/VladlenaSkubi-du/libft_42school.git libft
     make
 
 ## CHECKER PART
